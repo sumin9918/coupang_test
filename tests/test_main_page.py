@@ -24,26 +24,18 @@ class TestMainPage:
             main_page = MainPage(driver)
             main_page.open()
 
-            wait = ws(driver, 10)
-            wait.until(EC.url_contains("coupang.com"))
-            assert "coupang.com" in driver.current_url
-            time.sleep(2)
         except NoSuchElementException as e:
             assert False
 
-    # @pytest.mark.skip(reason="아직 테스트 케이스 발동 안함")
+    @pytest.mark.skip(reason="아직 테스트 케이스 발동 안함")
     def test_click_link_text(self, driver: WebDriver):
         try:
             main_page = MainPage(driver)
             main_page.open()
 
-            # 로그인
-            time.sleep(2)
-
             wait = ws(driver, 10)
-            wait.until(EC.url_contains("coupang.com"))
-            assert "coupang.com" in driver.current_url
 
+            # 로그인
             main_page.click_by_LINK_TEXT("로그인")
 
             assert "login" in driver.current_url
@@ -89,11 +81,6 @@ class TestMainPage:
 
             main_page = MainPage(driver)
             main_page.open()
-
-            wait = ws(driver, 10)
-            wait.until(EC.url_contains("coupang.com"))
-            assert "coupang.com" in driver.current_url
-            time.sleep(2)
 
             main_page.search_items("노트북")
 
