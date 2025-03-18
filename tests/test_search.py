@@ -73,15 +73,12 @@ class TestSearch:
         try:
             logger.info("🚀 로그인 검색 테스트")
 
-            # 쿠팡 메인 페이지 진입
-            main_page = MainPage(driver)
-            main_page.open()
-
             # 로그인
             login_page = LoginPage(driver)
-            login_page.open_with_login()
+            login_page.login()
 
             # 검색
+            main_page = MainPage(driver)
             main_page.search_items(self.SEARCH_TEXT)
 
             # 검색한 내용을 확인
