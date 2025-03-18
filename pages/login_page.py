@@ -23,19 +23,37 @@ class LoginPage:
     def __init__(self, driver: WebDriver):
         self.driver = driver
 
-    # 로그인 상태로 페이지 열기
-    def open_with_login(self):
+    # 로그인
+    def login(self):
         try:
+            # 메인 페이지 진입
+            main_page = MainPage(self.driver)
+            main_page.open()
+
             # 로그인 페이지 진입
             login_button = self.driver.find_element(By.LINK_TEXT, self.LOGIN_LINK_TEXT)
             login_button.click()
 
             assert "login" in self.driver.current_url
 
-            time.sleep(2)
+            time.sleep(20)
 
             # 로그인
-            self.login()
+            # 아이디 입력
+            id_input = self.driver.find_element(By.ID, self.ID_INPUT_ID)
+            id_input.send_keys(LOGIN_INFO["id"])
+
+            time.sleep(20)
+
+            # 비밀번호 입력
+            password_input = self.driver.find_element(By.ID, self.PASSWORD_INPUT_ID)
+            password_input.send_keys(LOGIN_INFO["password"])
+
+            time.sleep(5)
+
+            # 로그인 버튼 클릭
+            login_button = self.driver.find_element(By.XPATH, self.LOGIN_BUTTON_XPATH)
+            login_button.click()
 
             # 검증 : 로그아웃이 있으면 로그인 성공, 없으면 로그인 실패
             ws(self.driver, 10).until(
@@ -53,24 +71,6 @@ class LoginPage:
         except TimeoutError as e:
             logger.warning(f"❌ 로그인 실패 - 오류 발생: {e}")
             assert False
-
-    # 로그인
-    def login(self):
-        # 아이디 입력
-        id_input = self.driver.find_element(By.ID, self.ID_INPUT_ID)
-        id_input.send_keys(LOGIN_INFO["id"])
-
-        time.sleep(30)
-
-        # 비밀번호 입력
-        password_input = self.driver.find_element(By.ID, self.PASSWORD_INPUT_ID)
-        password_input.send_keys(LOGIN_INFO["password"])
-
-        time.sleep(30)
-
-        # 로그인 버튼 클릭
-        login_button = self.driver.find_element(By.XPATH, self.LOGIN_BUTTON_XPATH)
-        login_button.click()
 
     # 로그아웃
     def logout(self):
