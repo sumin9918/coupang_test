@@ -36,20 +36,20 @@ class LoginPage:
 
             assert "login" in self.driver.current_url
 
-            time.sleep(2)
+            time.sleep(20)
 
             # 로그인
             # 아이디 입력
             id_input = self.driver.find_element(By.ID, self.ID_INPUT_ID)
             id_input.send_keys(LOGIN_INFO["id"])
 
-            time.sleep(30)
+            time.sleep(20)
 
             # 비밀번호 입력
             password_input = self.driver.find_element(By.ID, self.PASSWORD_INPUT_ID)
             password_input.send_keys(LOGIN_INFO["password"])
 
-            time.sleep(30)
+            time.sleep(5)
 
             # 로그인 버튼 클릭
             login_button = self.driver.find_element(By.XPATH, self.LOGIN_BUTTON_XPATH)
